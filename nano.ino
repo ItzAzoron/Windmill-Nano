@@ -4,6 +4,8 @@
 #include <Stepper.h>
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
+#include <ClickEncoder.h>
+#include <TimerOne.h>
 
 /* Settings */
 const int stepsPerRevolution = 255; // Steps per revolution
@@ -22,6 +24,7 @@ const int currentSensor = A1;     // Analog sensor to mesuare the current
 int vaneValue = 0;
 int windSpeed = 0;
 int currentLcdMenu = 0;
+bool isInMaintenance = false;
 Stepper dirMotor(stepsPerRevolution, 8, 10, 9, 11); // Initialize the stepper for wind direction control:
 LiquidCrystal_I2C lcd(0x27,20,4);                   // Initialize the lcd on i2c adress 0x27
 
@@ -105,6 +108,10 @@ void lcdMainMenu(int item){
       break;
       
     case 5:
+      if(isInMaintenance)
+        lcdPrintData("Maintenance","On", "");
+      else
+        lcdPrintData("Maintenance","Off", "");
       break;
   }
 }
