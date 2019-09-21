@@ -59,6 +59,7 @@ void timerIsr() {
   encoder->service();
 }
 
+/* Reads the encoder status and triggers the correct functions */
 void handleEncoder() {
 
   #ifdef DEBUG
@@ -72,6 +73,7 @@ void handleEncoder() {
     switch (encoderButton)
     {
       case ClickEncoder::Clicked :
+        lcdMainMenu(currentLcdMenu,true);
         #ifdef DEBUG
           Serial.println("clicked");
         #endif
@@ -120,12 +122,12 @@ void scollDisplay(bool dir){
   else if(currentLcdMenu < 0)
     currentLcdMenu = mainMenuItems-1;
    
-  lcdMainMenu(currentLcdMenu);
+  lcdMainMenu(currentLcdMenu ,false);
     
 }
 
 /* Print the correct data at the lcd screen */
-void lcdMainMenu(int item){
+void lcdMainMenu(int item, bool selected){
   switch(item){
     case 0:
       lcdPrintData("Power", String(getPower()), "W");
@@ -144,10 +146,12 @@ void lcdMainMenu(int item){
       break;
       
     case 4:
-      lcdPrintData("Wind direction", String(getWindDirection()), "");
+      lcdPrintData("Wind direction", String(getWindDirection()), " DEG");
       break;
       
     case 5:
+      if(selected) 
+        isInMaintenance = !isInMaintenance;
       if(isInMaintenance)
         lcdPrintData("Maintenance","On", "");
       else
