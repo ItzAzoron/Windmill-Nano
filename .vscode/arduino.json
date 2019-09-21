@@ -1,8 +1,8 @@
 {
-    "board": "arduino:avr:nano",
-    "configuration": "cpu=atmega328",
+    "board": "arduino:avr:mega",
+    "configuration": "cpu=atmega2560",
     "sketch": "nano.ino",
-    "port": "COM3",
+    "port": "COM8",
     "output": "../build"
 
 }

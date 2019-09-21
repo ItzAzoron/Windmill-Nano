@@ -24,6 +24,7 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
+                "USBCON",
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.17134.0",
