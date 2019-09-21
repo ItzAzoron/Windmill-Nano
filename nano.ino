@@ -15,6 +15,7 @@ const int R2 = 680;                 // Value of resistor 2 from the voltage divi
 const int vanePot = A0;           // Analog input pin that the potentiometer is attached to
 const int windSpeedHall = 5;      // Digital input pin for hall sensor that reads wind speed
 const int voltageSensor = A2;     // Analog input pin at wich the voltage divider is conected
+const int currentSensor = A1;     // Analog sensor to mesuare the current
 
 
 /* initialize variables */
@@ -119,7 +120,10 @@ void lcdPrintData(String text, String value, String unit){
 
 /* Reads the current current from the current sensor */
 int getCurrent(){
-  //TODO
+  //TODO: convert reading to A
+  float current = 0;
+  current = analogRead(currentSensor);
+  return current;
 }
 
 /* Reads the voltage on the arduino port and convert it to the real values */
