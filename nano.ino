@@ -193,7 +193,7 @@ void maintenance(bool status){
 int getCurrent(){
   //TODO: convert reading to A
   float current = 0;
-  current = analogRead(currentSensor);
+  current = analogRead((511 - currentSensor)/102,4);
   return current;
 }
 
